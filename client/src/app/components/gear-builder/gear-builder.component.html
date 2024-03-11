@@ -1,0 +1,61 @@
+<div id="page">
+  <div class="col">
+    <button type="button" class="charDef" (click)="nav()" id="backButton">
+      <div class="images">
+        <img src="{{this.constants.API_VERSION}}/images/characters?name={{this.name}}" alt="{{this.name}}" class="charPortrait">
+        <img src="{{this.constants.API_VERSION}}/images/icons/class?name={{this.constants.CLASS_ENUM[this.char?(this.char.class):(0)]}}" alt="element" class="classImg">
+        <img src="{{this.constants.API_VERSION}}/images/icons/element?name={{this.constants.ELEMENT_ENUM[this.char?(this.char.element):(0)]}}" alt="element" class="classImg">
+      </div>
+    </button>
+    <div id="base_stats">
+      <h1>Base Stats</h1>
+      <p *ngFor="let key of this.statkeys" style="display: flex; align-items: center;">
+        <img src="/api/v1/images/icons/stats?name={{key}}" alt="">
+        {{key}} :  {{getVal(key)}}
+      </p>
+    </div>
+  </div>
+  <div class="col">
+    <div class="equipmentCard">
+      <div class="input-group">
+        <span class="input-group-text">Gear Set:</span>
+        <span class="input-group-text" *ngIf="gear[0].type" style="background-image: url('{{this.constants.API_VERSION}}/images/icons/gearSets?name={{this.constants.GEAR_ENUM[gear[0].type]}}');"></span>
+        <select class="form-select" [(ngModel)]="gear[0].type" aria-label="Select gear set" (change)="changer(gear[0].type)">
+          <option *ngFor="let opt of this.constants.GEAR_ENUM; let i = index" [value]="+i">
+            {{opt}}
+          </option>
+        </select>
+        <select class="form-select" [(ngModel)]="gear[0].level" aria-label="Select gear level" (change)="changer(gear[0].level)">
+          <option *ngFor="let opt of this.constants.LEVEL_ENUM; let i = index" [value]="+i">
+            {{opt}}
+          </option>
+        </select>
+      </div>
+      <div class="input-group">
+        <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[gear[0].main].name}}');"></span>
+        <select class="form-select" [(ngModel)]="gear[0].main" aria-label="Select main stat" (change)="changer(gear[0].main)">
+          <option *ngFor="let opt of this.constants.STAT_ENUM; let i = index" [value]="+i">
+            {{opt.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="equipmentCard">
+
+    </div>
+    <div class="equipmentCard">
+
+    </div>
+  </div>
+  <div class="col">
+    <div class="equipmentCard">
+
+    </div>
+    <div class="equipmentCard">
+
+    </div>
+    <div class="equipmentCard">
+
+    </div>
+  </div>
+</div>

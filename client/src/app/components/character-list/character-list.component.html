@@ -1,0 +1,37 @@
+<div class="searchContainer">
+
+</div>
+<div class="charListContainer container" *ngIf="charList">
+  <button type="button" class="charContainer" *ngFor="let char of charList|keyvalue" (click)="nav(char.value)">
+    <div class="charCard">
+      <img src="{{this.constants.API_VERSION}}/images/characters?name={{char.value.nameNoSpace}}" alt="{{char.value.nameNoSpace}}" class="charPortrait">
+      <div class="minorContainer">
+        <img src="{{this.constants.API_VERSION}}/images/icons/element?name={{this.constants.ELEMENT_ENUM[char.value.element]}}" alt="element" class="minorImg">
+        <img src="{{this.constants.API_VERSION}}/images/icons/class?name={{this.constants.CLASS_ENUM[char.value.class]}}" alt="element" class="minorImg">
+      </div>
+      <h4 class="charName">
+        {{char.value.name}}
+      </h4>
+      <div class="textContainer">
+        <p>
+          <img src="{{this.constants.API_VERSION}}/images/icons/stats?name=Attack">
+          Attack: {{char.value.base_stats.Attack}}
+        </p>
+        <p>
+          <img src="{{this.constants.API_VERSION}}/images/icons/stats?name=Speed" alt="">
+          Speed: {{char.value.base_stats.Speed}}
+        </p>
+      </div>
+      <div class="textContainer">
+        <p>
+          <img src="{{this.constants.API_VERSION}}/images/icons/stats?name=Defense">
+          Defence: {{char.value.base_stats.Defense}}
+        </p>
+        <p>
+          <img src="{{this.constants.API_VERSION}}/images/icons/stats?name=Health">
+          Health: {{char.value.base_stats.Health}}
+        </p>
+      </div>
+    </div>
+  </button>
+</div>
