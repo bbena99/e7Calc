@@ -18,15 +18,6 @@
   border-radius: 10px;
   background-color: transparent;
 }
-.images{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 100%;
-  padding-left: 1vw;
-}
 .charPortrait{
   width: 7.5vh;
   height: 7.5vh;
@@ -46,4 +37,10 @@ h1{
 }
 .input-group-text{
   width: 50px;
+}
+.col-1{
+  min-width: 100px;
+}
+.set-select{
+  min-width: 131px;
 }

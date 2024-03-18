@@ -18,13 +18,15 @@
   <div class="col">
     <div class="equipmentCard">
       <div class="input-group">
-        <span class="input-group-text">Gear Set:</span>
-        <span class="input-group-text" *ngIf="gear[0].type" style="background-image: url('{{this.constants.API_VERSION}}/images/icons/gearSets?name={{this.constants.GEAR_ENUM[gear[0].type]}}');"></span>
-        <select class="form-select" [(ngModel)]="gear[0].type" aria-label="Select gear set" (change)="changer(gear[0].type)">
+        <span class="input-group-text col-1">Gear set:</span>
+        <select class="form-select set-select" [(ngModel)]="gear[0].type" aria-label="Select gear set" (change)="changer(gear[0].type)">
           <option *ngFor="let opt of this.constants.GEAR_ENUM; let i = index" [value]="+i">
             {{opt}}
           </option>
         </select>
+        <span class="input-group-text" *ngIf="gear[0].type" style="background-image: url('{{this.constants.API_VERSION}}/images/icons/gearSets?name={{this.constants.GEAR_ENUM[gear[0].type]}}');background-repeat: no-repeat;background-position: center center;"></span>
+        <span class="input-group-text" *ngIf="!gear[0].type"></span>
+        <span class="input-group-text" style="width: 60px;">Level:</span>
         <select class="form-select" [(ngModel)]="gear[0].level" aria-label="Select gear level" (change)="changer(gear[0].level)">
           <option *ngFor="let opt of this.constants.LEVEL_ENUM; let i = index" [value]="+i">
             {{opt}}
@@ -32,12 +34,24 @@
         </select>
       </div>
       <div class="input-group">
-        <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[gear[0].main].name}}');"></span>
-        <select class="form-select" [(ngModel)]="gear[0].main" aria-label="Select main stat" (change)="changer(gear[0].main)">
+        <span class="input-group-text col-1">Main stat:</span>
+        <select class="form-select" [(ngModel)]="gear[0].main" aria-label="Select main stat" (change)="changer(gear[0].main)" disabled="false">
           <option *ngFor="let opt of this.constants.STAT_ENUM; let i = index" [value]="+i">
             {{opt.name}}
           </option>
         </select>
+        <span class="input-group-text">{{constants.STAT_ENUM[gear[0].main].main[gear[0].level]}}</span>
+        <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[gear[0].main].name}}');background-repeat: no-repeat;background-position: center center;"></span>
+      </div>
+      <div style="display: flex;">
+        <div *ngFor="let hit of gear[0].hits; let i = index;">
+          <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+            <input type="radio" class="btn-check" name="{{i}}_radio" id="{{i}}_1" autocomplete="off" value="0" [checked]="hit===0"> <label class="btn btn-light" for="{{i}}_1">+{{(i+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{i}}_radio" id="{{i}}_2" autocomplete="off" value="1" [checked]="hit===1"> <label class="btn btn-light" for="{{i}}_2">+{{(i+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{i}}_radio" id="{{i}}_3" autocomplete="off" value="2" [checked]="hit===2"> <label class="btn btn-light" for="{{i}}_3">+{{(i+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{i}}_radio" id="{{i}}_4" autocomplete="off" value="3" [checked]="hit===3"> <label class="btn btn-light" for="{{i}}_4">+{{(i+1)*3}}</label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="equipmentCard">
