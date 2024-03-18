@@ -1,5 +1,5 @@
-client/node-modules
-server/node-modules
+./client/node-modules
+./server/node-modules
 
 # Logs
 logs
