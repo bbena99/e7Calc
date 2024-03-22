@@ -1,4 +1,5 @@
 ./client/node-modules
+./client/.angular
 ./server/node-modules
 
 # Logs
