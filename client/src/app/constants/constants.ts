@@ -51,19 +51,19 @@ export class Constants {
       maxSub:[170,170,170,210,210,210,250,250]
     },
     /*03*/ {
-      name:'Attack(%)',
+      name:'Attack%',
       main:[50,50,50,60,60,60,65,65],
       minSub:[4,4,4,4,4,4,5,5],
       maxSub:[7,7,7,8,8,8,9,9]
     },
     /*04*/ {
-      name:'Defense(%)',
+      name:'Defense%',
       main:[50,50,50,60,60,60,65,65],
       minSub:[4,4,4,4,4,4,5,5],
       maxSub:[7,7,7,8,8,8,9,9]
     },
     /*05*/ {
-      name:'Health(%)',
+      name:'Health%',
       main:[50,50,50,60,60,60,65,65],
       minSub:[4,4,4,4,4,4,5,5],
       maxSub:[7,7,7,8,8,8,9,9]

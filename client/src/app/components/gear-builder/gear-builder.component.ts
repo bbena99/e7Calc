@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/constants/constants';
-import { Character } from 'src/app/models/character';
-import { Gear } from 'src/app/models/gear';
+import { Character, newChar } from 'src/app/models/character';
+import { Gear, newGear } from 'src/app/models/gear';
 import { CharacterService } from 'src/app/services/character.service';
 import { EquipmentService } from 'src/app/services/equipment.service';
 
@@ -14,7 +14,7 @@ import { EquipmentService } from 'src/app/services/equipment.service';
 export class GearBuilderComponent {
   constants = Constants
   name:string
-  char?:Character
+  char:Character
   gear:Gear[]
   statkeys:string[]=[]
   constructor(
@@ -25,30 +25,19 @@ export class GearBuilderComponent {
     const url = window.location.href.split('/')
     this.name = url[url.length-1]
     console.log(this.name)
-    charService.getOne(this.name,(char:Character)=>{
+    this.char=newChar()
+    charService.getOne(this.name)?.subscribe(char=>{
       console.log(char)
       this.char=char
       this.statkeys=Object.keys(this.char.base_stats)
     })
-    const newGear:Gear = {
-      level : 0,
-      type : undefined,
-      main : 0,
-      hits : [0,0,0,0,0],
-      subs : [
-        {stat:0,value:undefined},
-        {stat:1,value:undefined},
-        {stat:2,value:undefined},
-        {stat:3,value:undefined},
-      ]
-    }
     this.gear=[
-      {...newGear, main:0},
-      {...newGear, main:2},
-      {...newGear, main:1},
-      {...newGear, main:3},
-      {...newGear, main:3},
-      {...newGear, main:3},
+      {...newGear(), main:0},
+      {...newGear(), main:2},
+      {...newGear(), main:1},
+      {...newGear(), main:3},
+      {...newGear(), main:3},
+      {...newGear(), main:3},
     ]
     this.gear[0].subs[0].stat=4
     this.gear[1].subs[1].stat=4

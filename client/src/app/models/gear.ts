@@ -1,4 +1,5 @@
 export interface Gear {
+  id?:number,
   level : number, //index of level[] from constants
   type : number|undefined,  //enum
   main : number,  //enum for constants.ts/STAT_ENUM
@@ -7,4 +8,18 @@ export interface Gear {
     stat:number,
     value:number|undefined
   }[],
+}
+export function newGear():Gear{
+  return {
+    level: 0,
+    type: undefined,
+    main: 0,
+    hits: [0,0,0,0,0],
+    subs: [
+      {stat:0,value:undefined},
+      {stat:1,value:undefined},
+      {stat:2,value:undefined},
+      {stat:3,value:undefined},
+    ]
+  }
 }

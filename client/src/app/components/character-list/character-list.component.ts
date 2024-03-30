@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Constants } from 'src/app/constants/constants';
-import { Character } from 'src/app/models/character';
+import { Character } from 'src/app/models/';
 import { CharacterService } from 'src/app/services/character.service';
 
 @Component({
@@ -18,10 +18,10 @@ export class CharacterListComponent {
   ){
     //console.log("character-list.component.ts/constructor()")
     this.constants = Constants
-      charService.getAll((e:Map<string,Character>)=>{
-        this.charList=e
-        console.log(this.charList)
-      })
+    charService.getAll().subscribe(e=>{
+      this.charList=e
+      console.log(this.charList)
+    })
   }
   nav(char:Character){
     console.log(char)

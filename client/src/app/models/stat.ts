@@ -4,3 +4,12 @@ export interface Stat {
   minSub : number[],
   maxSub : number[],
 }
+
+export function newStat():Stat{
+  return {
+    name:"",
+    main:[],
+    minSub:[],
+    maxSub:[]
+  }
+}
