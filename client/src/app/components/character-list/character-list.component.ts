@@ -20,7 +20,7 @@ export class CharacterListComponent {
     this.constants = Constants
     charService.getAll().subscribe(e=>{
       this.charList=e
-      console.log(this.charList)
+      //console.log(this.charList)
     })
   }
   nav(char:Character){

@@ -1,17 +1,17 @@
 <div id="page">
   <div class="col">
     <button type="button" class="charDef" (click)="nav()" id="backButton">
-      <div class="images">
-        <img src="{{this.constants.API_VERSION}}/images/characters?name={{this.name}}" alt="{{this.name}}" class="charPortrait">
-        <img src="{{this.constants.API_VERSION}}/images/icons/class?name={{this.constants.CLASS_ENUM[this.char?(this.char.class):(0)]}}" alt="element" class="classImg">
-        <img src="{{this.constants.API_VERSION}}/images/icons/element?name={{this.constants.ELEMENT_ENUM[this.char?(this.char.element):(0)]}}" alt="element" class="classImg">
+      <img src="{{this.constants.API_VERSION}}/images/characters?name={{char.nameNoSpace}}" alt="{{char.nameNoSpace}}" class="charPortrait">
+      <div class="minorContainer">
+        <img src="{{this.constants.API_VERSION}}/images/icons/element?name={{this.constants.ELEMENT_ENUM[char.element]}}" alt="element" class="minorImg">
+        <img src="{{this.constants.API_VERSION}}/images/icons/class?name={{this.constants.CLASS_ENUM[char.class]}}" alt="element" class="minorImg">
       </div>
     </button>
     <div id="base_stats">
       <h1>Base Stats</h1>
-      <p *ngFor="let key of this.statkeys" style="display: flex; align-items: center;">
+      <p *ngFor="let key of this.statkeys; let i = index" style="display: flex; align-items: center;">
         <img src="/api/v1/images/icons/stats?name={{key}}" alt="">
-        {{key}} :  {{getVal(key)}}
+        {{key}} :  {{getVal(key)}}{{i>3?("%"):("")}}
       </p>
     </div>
   </div>
@@ -24,8 +24,15 @@
             {{opt}}
           </option>
         </select>
-        <span class="input-group-text" *ngIf="gear[card].type!==undefined" style="background-image: url('{{this.constants.API_VERSION}}/images/icons/gearSets?name={{this.constants.GEAR_ENUM[gear[card].type!]}}');background-repeat: no-repeat;background-position: center center;"></span>
-        <span class="input-group-text" *ngIf="!gear[card].type"></span>
+        <span
+          class="input-group-text"
+          *ngIf="gear[card].type>=0"
+          style="
+            background-image: url('{{this.constants.API_VERSION}}/images/icons/gearSets?name={{this.constants.GEAR_ENUM[gear[card].type]}}');
+            background-repeat: no-repeat;background-position: center center;
+          "
+        ></span>
+        <span class="input-group-text" *ngIf="gear[card].type===-1"></span>
         <span class="input-group-text" style="width: 60px;">Level:</span>
         <select class="form-select" id="{{card}}_level-select" [(ngModel)]="gear[card].level" aria-label="Select gear level">
           <option *ngFor="let opt of this.constants.LEVEL_ENUM; let i = index" [value]="+i">
@@ -40,7 +47,7 @@
             {{opt.name}}
           </option>
         </select>
-        <span class="input-group-text">{{constants.STAT_ENUM[gear[card].main].main[gear[card].level]}}</span>
+        <span class="input-group-text number-input">{{constants.STAT_ENUM[gear[card].main].main[gear[card].level]}}</span>
         <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[gear[card].main].name}}');background-repeat: no-repeat;background-position: center center;"></span>
       </div>
       <div style="display: flex; width: 100%;">
@@ -84,8 +91,14 @@
           </div>
         </div>
         <div style="display: flex;flex-direction: column;"><!--Right box-->
-          <div *ngFor="let row of gear[card].subs" class="input-group sub-row">
-            <input type="text" class="input-group-text" name="placeholder-{{row.stat}}" id="{{card}}_placeholder-{{row.stat}}">
+          <div *ngFor="let row of gear[card].subs; let j = index" class="input-group sub-row">
+            <select class="form-select" [(ngModel)]="gear[card].subs[j].stat" aria-label="Select main stat">
+              <option *ngFor="let opt of this.constants.STAT_ENUM; let i = index" [value]="+i">
+                {{opt.name}}
+              </option>
+            </select>
+            <input type="number" class="input-group-text number-input" name="placeholder-{{row.stat}}" id="{{card}}_placeholder-{{row.stat}}" [(ngModel)]="gear[card].subs[j].value" (change)="debugg(gear)">
+            <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[row.stat].name}}');background-repeat: no-repeat;background-position: center center;"></span>
           </div>
         </div>
       </div>

@@ -10,7 +10,7 @@ import { Constants } from '../constants/constants';
 export class CharacterService implements OnInit {
   private URL : string = Constants.API_VERSION
   private charMap:Map<string,Character>
-  public charMapSubject: BehaviorSubject<Map<string,Character>>
+  private charMapSubject: BehaviorSubject<Map<string,Character>>
   private char:Character
   private charSubject: BehaviorSubject<Character>
 
@@ -30,14 +30,14 @@ export class CharacterService implements OnInit {
    * Start of external function calls
    */
   public getAll():Observable<Map<string,Character>>{
-    console.log(this.charMap)
     //console.log("character.service.ts/getAll()")
-    return this.charMap.size>0
+    //console.log(this.charMap)
+    return this.charMap.size>1
       ?(this.charMapSubject.asObservable())
       :(this.parseAll())
   }
   public getOne(name:string):Observable<Character>|undefined{
-    console.log(this.charMap)
+    //console.log(this.charMap)
     if(this.char.nameNoSpace===name)return this.charSubject.asObservable()
     return this.parseOne(name)
   }
@@ -45,13 +45,12 @@ export class CharacterService implements OnInit {
    * Start of api function calls
   */
   private parseAll():Observable<Map<string,Character>> {
-    console.warn("fucker")
-   return this.http
-   .get<Map<string,Character>>( this.URL+'/characters')
-   .pipe<Map<string,Character>>( tap( cArray => {
-      //@ts-ignore
-      this.setAll(cArray)
-    }))
+    return this.http
+      .get<Map<string,Character>>( this.URL+'/characters')
+      .pipe<Map<string,Character>>( tap( cArray => {
+          //@ts-ignore
+          this.setAll(cArray)
+        }))
   }
   private parseOne(name:string):Observable<Character>{
     return this.http
