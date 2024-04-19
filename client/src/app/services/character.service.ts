@@ -47,10 +47,11 @@ export class CharacterService implements OnInit {
   private parseAll():Observable<Map<string,Character>> {
     return this.http
       .get<Map<string,Character>>( this.URL+'/characters')
-      .pipe<Map<string,Character>>( tap( cArray => {
+      .pipe<Map<string,Character>>( tap( 
           //@ts-ignore
-          this.setAll(cArray)
-        }))
+          cArray => {this.setAll(cArray)},
+          err=>{console.error(err)}
+        ))
   }
   private parseOne(name:string):Observable<Character>{
     return this.http
@@ -68,11 +69,12 @@ export class CharacterService implements OnInit {
     this.charMapSubject.next(charMap)
   }
   private setOne(c:Character):void{
-    if(!this.charMap.has(c.nameNoSpace)){
-      this.charMap.set(c.nameNoSpace,c)
-    }
     this.char = c
+    if(!this.char.gear_stats)this.char.gear_stats={...this.char.base_stats}
+    this.charMap.set(this.char.nameNoSpace,this.char)
+    console.log(this.char)
     this.charSubject.next(c)
+    this.charMapSubject.next(this.charMap)
   }
 }
 function delay(ms:number){

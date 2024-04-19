@@ -1,5 +1,5 @@
 export interface Gear {
-  id?:number,
+  id:number,
   level : number, //index of level[] from constants
   type : number,  //enum
   main : number,  //enum for constants.ts/STAT_ENUM
@@ -11,6 +11,7 @@ export interface Gear {
 }
 export function newGear():Gear{
   return {
+    id:0,
     level: 0,
     type: -1,
     main: 0,

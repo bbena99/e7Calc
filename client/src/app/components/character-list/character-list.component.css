@@ -18,51 +18,21 @@
   width: 100%;
   height: 100%;
   padding: 10px;
-  border: 2px solid white;
+  background-color: #7077A1;
+  border: 2px solid #F6B17A;
   border-radius: 15px;
   box-shadow:
-    1px 1px 1px #ffffff44,
-    2px 2px 2px #ffffff33,
-    3px 3px 3px #ffffff22,
-    5px 5px 5px #ffffff11;
-}
-/*Start of Images*/
-.imgContainer{
-  display: flex;
-}
-.charPortrait{
-  width: 90px;
-  height: 90px;
-  border: 2px solid white;
-  border-radius: 50%;
-}
-.minorContainer{
-  height: 90px;
-  width: 40px;
-  margin-left: -20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.minorImg{
-  width: 40px;
-  height: 40px;
-  background-color: black;
-  border: 2px solid white;
-  border-radius: 50%;
-}
-.charName{
-  color: white;
-  width: calc(90% - 120px);
-  margin: 5%;
-  text-decoration: underline;
+    1px 1px 1px #F6B17A44,
+    2px 2px 2px #F6B17A33,
+    3px 3px 3px #F6B17A22,
+    5px 5px 5px #F6B17A11;
 }
 /*Start of text*/
 .textContainer{
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
-  color: white;
+  color: #F6B17A;
   width: 45%;
   margin-top: 5%;
 }

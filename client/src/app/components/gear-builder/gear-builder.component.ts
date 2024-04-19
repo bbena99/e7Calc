@@ -43,9 +43,21 @@ export class GearBuilderComponent {
     this.gear[1].subs[1].stat=4
     this.gear[2].subs[2].stat=4
   }
-  getVal(key:string):string{
+  getBase(key:string):string{
     //@ts-ignore
     return this.char.base_stats[key]
+  }
+  getPostGear(key:string):string{
+    console.log(this.char.gear_stats)
+    //@ts-ignore
+    return this.char.gear_stats[key]
+  }
+  isUsed(checker:Gear,val:number):boolean{
+    if(checker.main===val)return true;
+    const boolArr:boolean[] = checker.subs.map(s=>{return (s.stat===val)?true:false;})
+    const ret:boolean = boolArr.indexOf(true)>=0;
+    console.log(ret)
+    return (boolArr.indexOf(true)>=0)?true:false
   }
   nav(){
     this.router.navigateByUrl("/Home")
