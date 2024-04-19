@@ -1,6 +1,14 @@
 import { Stat } from "../models/stat";
 export class Constants {
-  public static API_VERSION : string = '/api/v1'
+  public static API_VERSION : string = '/api/v1'//It's just because this will update all endpoints at the same time when a version is changed
+  public static GEAR_TYPE: string[]=[
+    /*0*/'Weapon',
+    /*1*/'Helmet',
+    /*2*/'Armor',
+    /*3*/'Necklace',
+    /*4*/'Ring',
+    /*5*/'Boots' 
+  ]
   public static LEVEL_ENUM : number[] = [
     /*0*/55,
     /*1*/67,

@@ -27,7 +27,7 @@
   </div>
   <div class="col" *ngFor="let col of [[0,1,2],[3,4,5]]">
     <div *ngFor="let card of col" class="equipmentCard">
-      <h4>Weapon</h4>
+      <h4>{{this.constants.GEAR_TYPE[card]}}</h4>
       <div class="input-group">
         <span class="input-group-text col-1">Gear set:</span>
         <select class="form-select set-select" [(ngModel)]="gear[card].type" aria-label="Select gear set">
@@ -66,39 +66,39 @@
         <!-- <div *ngFor="let col of gear[card].hits; let i = index;">
           <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
             <input *ngFor="let row of gear[card].subs; let j = index" type="radio" class="btn-check" name="{{i}}_radio" id="{{i}}_{{j}}" autocomplete="off" (click)="gear[card].hits[i]=j;debugg({i,j,bool:gear[card].hits[i]===j})" [checked]="gear[card].hits[i]===j">
-            <label *ngFor="let row of gear[card].subs; let j = index" class="btn btn-light" for="{{i}}_{{j}}">+{{(i+1)*3}}</label>
+            <label *ngFor="let row of gear[card].subs; let j = index" class="btn btn-light radio" for="{{i}}_{{j}}">+{{(i+1)*3}}</label>
           </div>
         </div> -->
         <div style="display: flex; width: 50%;"><!--Left box-->
           <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
-            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_1" autocomplete="off" (click)="gear[card].hits[0]=0;" [checked]="gear[card].hits[0]===0"> <label class="btn btn-light" for="{{card}}_0_1">+{{(0+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_2" autocomplete="off" (click)="gear[card].hits[0]=1;" [checked]="gear[card].hits[0]===1"> <label class="btn btn-light" for="{{card}}_0_2">+{{(0+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_3" autocomplete="off" (click)="gear[card].hits[0]=2;" [checked]="gear[card].hits[0]===2"> <label class="btn btn-light" for="{{card}}_0_3">+{{(0+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_4" autocomplete="off" (click)="gear[card].hits[0]=3;" [checked]="gear[card].hits[0]===3"> <label class="btn btn-light" for="{{card}}_0_4">+{{(0+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_1" autocomplete="off" (click)="gear[card].hits[0]=0;" [checked]="gear[card].hits[0]===0"> <label class="btn btn-light radio" for="{{card}}_0_1">+{{(0+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_2" autocomplete="off" (click)="gear[card].hits[0]=1;" [checked]="gear[card].hits[0]===1"> <label class="btn btn-light radio" for="{{card}}_0_2">+{{(0+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_3" autocomplete="off" (click)="gear[card].hits[0]=2;" [checked]="gear[card].hits[0]===2"> <label class="btn btn-light radio" for="{{card}}_0_3">+{{(0+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_0_radio" id="{{card}}_0_4" autocomplete="off" (click)="gear[card].hits[0]=3;" [checked]="gear[card].hits[0]===3"> <label class="btn btn-light radio" for="{{card}}_0_4">+{{(0+1)*3}}</label>
           </div>
           <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
-            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_1" autocomplete="off" (click)="gear[card].hits[1]=0;" [checked]="gear[card].hits[1]===0"> <label class="btn btn-light" for="{{card}}_1_1">+{{(1+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_2" autocomplete="off" (click)="gear[card].hits[1]=1;" [checked]="gear[card].hits[1]===1"> <label class="btn btn-light" for="{{card}}_1_2">+{{(1+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_3" autocomplete="off" (click)="gear[card].hits[1]=2;" [checked]="gear[card].hits[1]===2"> <label class="btn btn-light" for="{{card}}_1_3">+{{(1+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_4" autocomplete="off" (click)="gear[card].hits[1]=3;" [checked]="gear[card].hits[1]===3"> <label class="btn btn-light" for="{{card}}_1_4">+{{(1+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_1" autocomplete="off" (click)="gear[card].hits[1]=0;" [checked]="gear[card].hits[1]===0"> <label class="btn btn-light radio" for="{{card}}_1_1">+{{(1+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_2" autocomplete="off" (click)="gear[card].hits[1]=1;" [checked]="gear[card].hits[1]===1"> <label class="btn btn-light radio" for="{{card}}_1_2">+{{(1+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_3" autocomplete="off" (click)="gear[card].hits[1]=2;" [checked]="gear[card].hits[1]===2"> <label class="btn btn-light radio" for="{{card}}_1_3">+{{(1+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_1_radio" id="{{card}}_1_4" autocomplete="off" (click)="gear[card].hits[1]=3;" [checked]="gear[card].hits[1]===3"> <label class="btn btn-light radio" for="{{card}}_1_4">+{{(1+1)*3}}</label>
           </div>
           <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
-            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_1" autocomplete="off" (click)="gear[card].hits[2]=0;" [checked]="gear[card].hits[2]===0"> <label class="btn btn-light" for="{{card}}_2_1">+{{(2+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_2" autocomplete="off" (click)="gear[card].hits[2]=1;" [checked]="gear[card].hits[2]===1"> <label class="btn btn-light" for="{{card}}_2_2">+{{(2+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_3" autocomplete="off" (click)="gear[card].hits[2]=2;" [checked]="gear[card].hits[2]===2"> <label class="btn btn-light" for="{{card}}_2_3">+{{(2+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_4" autocomplete="off" (click)="gear[card].hits[2]=3;" [checked]="gear[card].hits[2]===3"> <label class="btn btn-light" for="{{card}}_2_4">+{{(2+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_1" autocomplete="off" (click)="gear[card].hits[2]=0;" [checked]="gear[card].hits[2]===0"> <label class="btn btn-light radio" for="{{card}}_2_1">+{{(2+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_2" autocomplete="off" (click)="gear[card].hits[2]=1;" [checked]="gear[card].hits[2]===1"> <label class="btn btn-light radio" for="{{card}}_2_2">+{{(2+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_3" autocomplete="off" (click)="gear[card].hits[2]=2;" [checked]="gear[card].hits[2]===2"> <label class="btn btn-light radio" for="{{card}}_2_3">+{{(2+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_2_radio" id="{{card}}_2_4" autocomplete="off" (click)="gear[card].hits[2]=3;" [checked]="gear[card].hits[2]===3"> <label class="btn btn-light radio" for="{{card}}_2_4">+{{(2+1)*3}}</label>
           </div>
           <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
-            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_1" autocomplete="off" (click)="gear[card].hits[3]=0;" [checked]="gear[card].hits[3]===0"> <label class="btn btn-light" for="{{card}}_3_1">+{{(3+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_2" autocomplete="off" (click)="gear[card].hits[3]=1;" [checked]="gear[card].hits[3]===1"> <label class="btn btn-light" for="{{card}}_3_2">+{{(3+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_3" autocomplete="off" (click)="gear[card].hits[3]=2;" [checked]="gear[card].hits[3]===2"> <label class="btn btn-light" for="{{card}}_3_3">+{{(3+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_4" autocomplete="off" (click)="gear[card].hits[3]=3;" [checked]="gear[card].hits[3]===3"> <label class="btn btn-light" for="{{card}}_3_4">+{{(3+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_1" autocomplete="off" (click)="gear[card].hits[3]=0;" [checked]="gear[card].hits[3]===0"> <label class="btn btn-light radio" for="{{card}}_3_1">+{{(3+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_2" autocomplete="off" (click)="gear[card].hits[3]=1;" [checked]="gear[card].hits[3]===1"> <label class="btn btn-light radio" for="{{card}}_3_2">+{{(3+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_3" autocomplete="off" (click)="gear[card].hits[3]=2;" [checked]="gear[card].hits[3]===2"> <label class="btn btn-light radio" for="{{card}}_3_3">+{{(3+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_3_radio" id="{{card}}_3_4" autocomplete="off" (click)="gear[card].hits[3]=3;" [checked]="gear[card].hits[3]===3"> <label class="btn btn-light radio" for="{{card}}_3_4">+{{(3+1)*3}}</label>
           </div>
           <div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
-            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_1" autocomplete="off" (click)="gear[card].hits[4]=0;" [checked]="gear[card].hits[4]===0"> <label class="btn btn-light" for="{{card}}_4_1">+{{(4+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_2" autocomplete="off" (click)="gear[card].hits[4]=1;" [checked]="gear[card].hits[4]===1"> <label class="btn btn-light" for="{{card}}_4_2">+{{(4+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_3" autocomplete="off" (click)="gear[card].hits[4]=2;" [checked]="gear[card].hits[4]===2"> <label class="btn btn-light" for="{{card}}_4_3">+{{(4+1)*3}}</label>
-            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_4" autocomplete="off" (click)="gear[card].hits[4]=3;" [checked]="gear[card].hits[4]===3"> <label class="btn btn-light" for="{{card}}_4_4">+{{(4+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_1" autocomplete="off" (click)="gear[card].hits[4]=0;" [checked]="gear[card].hits[4]===0"> <label class="btn btn-light radio" for="{{card}}_4_1">+{{(4+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_2" autocomplete="off" (click)="gear[card].hits[4]=1;" [checked]="gear[card].hits[4]===1"> <label class="btn btn-light radio" for="{{card}}_4_2">+{{(4+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_3" autocomplete="off" (click)="gear[card].hits[4]=2;" [checked]="gear[card].hits[4]===2"> <label class="btn btn-light radio" for="{{card}}_4_3">+{{(4+1)*3}}</label>
+            <input type="radio" class="btn-check" name="{{card}}_4_radio" id="{{card}}_4_4" autocomplete="off" (click)="gear[card].hits[4]=3;" [checked]="gear[card].hits[4]===3"> <label class="btn btn-light radio" for="{{card}}_4_4">+{{(4+1)*3}}</label>
           </div>
         </div>
         <div style="display: flex;flex-direction: column;"><!--Right box-->

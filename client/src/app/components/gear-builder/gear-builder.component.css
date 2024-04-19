@@ -59,3 +59,8 @@ h1{
 .number-input{
   width: 70px;
 }
+.radio{
+  display: flex;
+  align-items: center;
+  padding: 2px;
+}

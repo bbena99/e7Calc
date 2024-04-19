@@ -72,8 +72,6 @@ export class CharacterService implements OnInit {
     this.char = c
     if(!this.char.gear_stats)this.char.gear_stats={...this.char.base_stats}
     this.charMap.set(this.char.nameNoSpace,this.char)
-    console.log(this.char)
-    this.charSubject.next(c)
     this.charMapSubject.next(this.charMap)
   }
 }
