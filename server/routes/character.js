@@ -4,7 +4,6 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/:nameNoSpace',(req,res,next)=>{
-  console.log("GET "+req.url+" was hit")
   let char = undefined;
   charList.forEach(c=>{
     if(c.nameNoSpace===req.params.nameNoSpace){

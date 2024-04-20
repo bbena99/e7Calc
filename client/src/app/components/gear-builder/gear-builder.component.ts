@@ -33,11 +33,11 @@ export class GearBuilderComponent {
     })
     this.gear=[
       {...newGear(), main:0},
-      {...newGear(), main:2},
-      {...newGear(), main:1},
-      {...newGear(), main:3},
-      {...newGear(), main:3},
-      {...newGear(), main:3},
+      {...newGear(), main:2,id:1},
+      {...newGear(), main:1,id:2},
+      {...newGear(), main:3,id:3},
+      {...newGear(), main:3,id:4},
+      {...newGear(), main:3,id:5},
     ]
     this.gear[0].subs[0].stat=4
     this.gear[1].subs[1].stat=4
@@ -48,15 +48,23 @@ export class GearBuilderComponent {
     return this.char.base_stats[key]
   }
   getPostGear(key:string):string{
-    console.log(this.char.gear_stats)
     //@ts-ignore
     return this.char.gear_stats[key]
+  }
+  getMin(stat: number,gear: Gear):string {
+    let  ret:number = this.constants.STAT_ENUM[stat].minSub[gear.level]
+    ret = ret*(gear.hits.filter(hit=>gear.subs[hit].stat===stat).length+1)
+    return ""+ret
+  }
+  getMax(stat:number,gear:Gear):string{
+    let  ret:number = this.constants.STAT_ENUM[stat].maxSub[gear.level]
+    ret = ret*(gear.hits.filter(hit=>gear.subs[hit].stat===stat).length+1)
+    return ""+ret;
   }
   isUsed(checker:Gear,val:number):boolean{
     if(checker.main===val)return true;
     const boolArr:boolean[] = checker.subs.map(s=>{return (s.stat===val)?true:false;})
     const ret:boolean = boolArr.indexOf(true)>=0;
-    console.log(ret)
     return (boolArr.indexOf(true)>=0)?true:false
   }
   nav(){

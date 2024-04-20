@@ -108,7 +108,15 @@
                 {{opt.name}}
               </option>
             </select>
-            <input type="number" class="input-group-text number-input" name="placeholder-{{row.stat}}" id="{{card}}_placeholder-{{row.stat}}" [(ngModel)]="gear[card].subs[j].value">
+            <input 
+              type="number"
+              class="input-group-text number-input"
+              name="placeholder-{{row.stat}}"
+              min="{{getMin(+(row.stat),gear[card])}}"
+              max="{{getMax(+(row.stat),gear[card])}}"
+              id="{{card}}_placeholder-{{row.stat}}"
+              [(ngModel)]="gear[card].subs[j].value"
+            >
             <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[row.stat].name}}');background-repeat: no-repeat;background-position: center center;"></span>
           </div>
         </div>
