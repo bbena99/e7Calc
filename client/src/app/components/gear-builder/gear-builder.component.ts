@@ -53,14 +53,15 @@ export class GearBuilderComponent {
   }
   getMin(stat: number,gear: Gear,subIndex:number):string {
     let  ret:number = this.constants.STAT_ENUM[stat].minSub[gear.level]
-    ret = ret*(gear.hits.filter(hit=>gear.subs[hit].stat===stat).length+1)
+    ret = ret*(gear.hits.filter(hit=>+(gear.subs[hit].stat)===stat).length+1)
     if(!gear.subs[subIndex].value || gear.subs[subIndex].value!<ret)gear.subs[subIndex].value=ret;
     return ""+ret
   }
   getMax(stat:number,gear:Gear,subIndex:number):string{
     let  ret:number = this.constants.STAT_ENUM[stat].maxSub[gear.level]
-    const mult: number = gear.hits.filter(hit=>gear.subs[+hit].stat===stat).length+1
+    const mult: number = gear.hits.filter(hit=>+(gear.subs[+hit].stat)===stat).length+1
     if(mult>1&&mult<4){
+      console.log(stat)
       console.log(gear.hits)
       console.log(gear.subs)
       console.log(mult)
