@@ -51,14 +51,23 @@ export class GearBuilderComponent {
     //@ts-ignore
     return this.char.gear_stats[key]
   }
-  getMin(stat: number,gear: Gear):string {
+  getMin(stat: number,gear: Gear,subIndex:number):string {
     let  ret:number = this.constants.STAT_ENUM[stat].minSub[gear.level]
     ret = ret*(gear.hits.filter(hit=>gear.subs[hit].stat===stat).length+1)
+    if(!gear.subs[subIndex].value || gear.subs[subIndex].value!<ret)gear.subs[subIndex].value=ret;
     return ""+ret
   }
-  getMax(stat:number,gear:Gear):string{
+  getMax(stat:number,gear:Gear,subIndex:number):string{
     let  ret:number = this.constants.STAT_ENUM[stat].maxSub[gear.level]
-    ret = ret*(gear.hits.filter(hit=>gear.subs[hit].stat===stat).length+1)
+    const mult: number = gear.hits.filter(hit=>gear.subs[+hit].stat===stat).length+1
+    if(mult>1&&mult<4){
+      console.log(gear.hits)
+      console.log(gear.subs)
+      console.log(mult)
+      console.log(ret)
+    }
+    ret = ret*mult
+    if(gear.subs[subIndex].value && gear.subs[subIndex].value!>ret)gear.subs[subIndex].value=ret;
     return ""+ret;
   }
   isUsed(checker:Gear,val:number):boolean{
@@ -70,8 +79,27 @@ export class GearBuilderComponent {
   nav(){
     this.router.navigateByUrl("/Home")
   }
-  changer(core:number|undefined,){
-    console.log("gear-builder.component.ts/changer("+core+")")
+  changer(){
+    const stat:number[]=[0,0,0,0,0,0,0,0,0,0,0]
+    this.gear.forEach(g=>{
+      stat[g.main]+=this.constants.STAT_ENUM[g.main].main[g.level]
+      g.subs.forEach(sub=>{
+        stat[sub.stat]+=sub.value??0
+      })
+    })
+    this.constants.STAT_ENUM.forEach((stat_enum,i,arr)=>{
+      switch(i){
+        case 3:
+        case 4:
+        case 5:
+          //@ts-ignore
+          this.char.gear_stats[arr[i-3].name]+=+((this.char.base_stats[arr[i-3].name]*(stat[i]/100)).toFixed(0))
+          break;
+        default:
+          //@ts-ignore
+          this.char.gear_stats[stat_enum.name]=this.char.base_stats[stat_enum.name]+stat[i]
+      }
+    })
   }
   debugg(p:any){
     console.log(p)
