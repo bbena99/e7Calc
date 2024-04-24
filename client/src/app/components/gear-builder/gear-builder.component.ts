@@ -30,14 +30,15 @@ export class GearBuilderComponent {
       console.log(char)
       this.char=char
       this.statkeys=Object.keys(this.char.base_stats)
+      this.changer()
     })
     this.gear=[
-      {...newGear(), main:0},
-      {...newGear(), main:2,id:1},
-      {...newGear(), main:1,id:2},
-      {...newGear(), main:3,id:3},
-      {...newGear(), main:3,id:4},
-      {...newGear(), main:3,id:5},
+      {...newGear(), main:0, posibleMain:[0]},
+      {...newGear(), main:2,id:1, posibleMain:[2]},
+      {...newGear(), main:1,id:2, posibleMain:[1]},
+      {...newGear(), main:3,id:3, posibleMain:[0,1,2,3,4,5,6,7,8,9,10]},
+      {...newGear(), main:3,id:4, posibleMain:[0,1,2,3,4,5,6,7,8,9,10]},
+      {...newGear(), main:3,id:5, posibleMain:[0,1,2,3,4,5,6,7,8,9,10]},
     ]
     this.gear[0].subs[0].stat=4
     this.gear[1].subs[1].stat=4

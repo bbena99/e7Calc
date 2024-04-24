@@ -45,7 +45,7 @@
         ></span>
         <span class="input-group-text" *ngIf="gear[card].type===-1"></span>
         <span class="input-group-text" style="width: 60px;">Level:</span>
-        <select class="form-select" id="{{card}}_level-select" [(ngModel)]="gear[card].level" aria-label="Select gear level">
+        <select class="form-select" id="{{card}}_level-select" [(ngModel)]="gear[card].level" aria-label="Select gear level" (change)="changer()">
           <option *ngFor="let opt of this.constants.LEVEL_ENUM; let i = index" [value]="+i">
             {{opt}}
           </option>
@@ -53,7 +53,7 @@
       </div>
       <div class="input-group">
         <span class="input-group-text col-1">Main stat:</span>
-        <select class="form-select" [(ngModel)]="gear[card].main" aria-label="Select main stat" disabled="{{(card<3?(true):(false))}}">
+        <select class="form-select" [(ngModel)]="gear[card].main" aria-label="Select main stat" disabled="{{(card<3?(true):(false))}}" (change)="changer()">
           <option *ngFor="let opt of this.constants.STAT_ENUM; let i = index" [value]="+i">
             {{opt.name}}
           </option>
@@ -117,6 +117,8 @@
               id="{{card}}_placeholder-{{row.stat}}"
               (change)="changer()"
               [(ngModel)]="gear[card].subs[j].value"
+              ngbTooltip="{{getMin(+(row.stat),gear[card],j)}}-{{getMax(+(row.stat),gear[card],j)}}"
+              triggers="focus"
             >
             <span class="input-group-text"style="background-image: url('{{this.constants.API_VERSION}}/images/icons/stats?name={{this.constants.STAT_ENUM[row.stat].name}}');background-repeat: no-repeat;background-position: center center;"></span>
           </div>
