@@ -47,3 +47,9 @@ body{
   margin: 5%;
   text-decoration: underline;
 }
+/* This is only called in gear-builder component, but needs to be at the root of the project*/
+.mytooltip{
+  --bs-tooltip-bg: #424769;
+  --bs-tooltip-color: #F6B17A;
+  --bs-tooltip-opacity: 1;
+}
