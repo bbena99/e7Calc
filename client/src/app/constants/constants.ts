@@ -101,7 +101,7 @@ export class Constants {
       maxSub:[7,7,7,8,8,8,9,9]
     },
     /*10*/ {
-      name:'EffectResistance',
+      name:'Effect Resistance',
       main:[50,50,50,60,60,60,65,65],
       minSub:[4,4,4,4,4,4,5,5],
       maxSub:[7,7,7,8,8,8,9,9]
