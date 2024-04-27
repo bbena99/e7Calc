@@ -4,6 +4,8 @@ export interface Character {
   element : number;
   class : number;
   sign : number;
+  engraveStat:number;
+  engrave:number[];
   base_stats: {
     'Attack' : number;
     'Defense' : number;
@@ -35,6 +37,8 @@ export function newChar():Character{
     element : 0,
     class : 0,
     sign : 0,
+    engraveStat:0,
+    engrave:[],
     base_stats: {
       'Attack' : 0,
       'Defense' : 0,
