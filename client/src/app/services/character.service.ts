@@ -75,7 +75,3 @@ export class CharacterService implements OnInit {
     this.charMapSubject.next(this.charMap)
   }
 }
-function delay(ms:number){
-  console.log("here")
-  return new Promise( res => setTimeout(res,ms))
-}
