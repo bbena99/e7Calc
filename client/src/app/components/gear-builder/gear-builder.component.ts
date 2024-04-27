@@ -85,11 +85,49 @@ export class GearBuilderComponent {
   changer(){
     const stat:number[]=[this.artifact.attack,0,this.artifact.health,0,0,0,0,0,0,0,0]
     stat[this.char.engraveStat]+=+this.engrave;
+    const gearSet:number[]=[]
     this.gear.forEach(g=>{
+      gearSet[g.type] ?
+        gearSet[g.type]++ :
+        gearSet[g.type]=1;
       stat[g.main]+=this.constants.STAT_ENUM[g.main].main[g.level]
       g.subs.forEach(sub=>{
         stat[sub.stat]+=sub.value??0
       })
+    })
+    gearSet.forEach((set,i)=>{
+      switch(i){
+        case 0:/*'Attack'*/
+          if(set>=4)stat[3]+=45;
+          break;
+        case 1:/*'Defense'*/
+          stat[4]+=(20*Math.floor(set/2));
+          break;
+        case 2:/*'Health'*/
+          stat[5]+=(20*Math.floor(set/2));
+          break;
+        case 3:/*'Speed'*/
+          if(set>=4)stat[6]+=Math.round(this.char.base_stats.Speed*0.25);
+          break;
+        case 4:/*'Critical'*/
+          stat[7]+=(12*Math.floor(set/2));
+          break;
+        case 5:/*'Destruction'*/
+          if(set>=4)stat[8]+=60;
+          break;
+        case 6:/*'Hit'*/
+          stat[9]+=(20*Math.floor(set/2));
+          break;
+        case 7:/*'Resist'*/
+          stat[10]+=(20*Math.floor(set/2));
+          break;
+        case 10:/*'Unity'*/
+          this.char.gear_stats['Dual Attack Chance']+=(8*Math.floor(set/2));
+          break;
+        case 17:/*'Torrent'*/
+          stat[5]-=(10*Math.floor(set/2));//Also increases dmg dealt by 10%...
+          break;
+      }//All other gear sets have unique battle effects that don't adjust main stats.
     })
     this.constants.STAT_ENUM.forEach((stat_enum,i,arr)=>{
       switch(i){
