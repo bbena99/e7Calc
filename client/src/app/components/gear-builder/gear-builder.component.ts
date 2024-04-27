@@ -17,6 +17,11 @@ export class GearBuilderComponent {
   char:Character
   gear:Gear[]
   statkeys:string[]=[]
+  artifact:{
+    attack:number,
+    health:number
+  }
+  engrave:number
   constructor(
     private router:Router,
     private charService:CharacterService,
@@ -32,6 +37,8 @@ export class GearBuilderComponent {
       this.statkeys=Object.keys(this.char.base_stats)
       this.changer()
     })
+    this.artifact={attack:0,health:0};
+    this.engrave=0;
     this.gear=[
       {...newGear(), main:0, posibleMain:[0]},
       {...newGear(), main:2,id:1, posibleMain:[2]},
@@ -43,6 +50,7 @@ export class GearBuilderComponent {
     this.gear[0].subs[0].stat=4
     this.gear[1].subs[1].stat=4
     this.gear[2].subs[2].stat=4
+
   }
   getBase(key:string):string{
     //@ts-ignore
@@ -61,13 +69,6 @@ export class GearBuilderComponent {
   getMax(stat:number,gear:Gear,subIndex:number):string{
     let  ret:number = this.constants.STAT_ENUM[stat].maxSub[gear.level]
     const mult: number = gear.hits.filter(hit=>+(gear.subs[+hit].stat)===stat).length+1
-    if(mult>1&&mult<4){
-      console.log(stat)
-      console.log(gear.hits)
-      console.log(gear.subs)
-      console.log(mult)
-      console.log(ret)
-    }
     ret = ret*mult
     if(gear.subs[subIndex].value && gear.subs[subIndex].value!>ret)gear.subs[subIndex].value=ret;
     return ""+ret;
@@ -82,7 +83,8 @@ export class GearBuilderComponent {
     this.router.navigateByUrl("/Home")
   }
   changer(){
-    const stat:number[]=[0,0,0,0,0,0,0,0,0,0,0]
+    const stat:number[]=[this.artifact.attack,0,this.artifact.health,0,0,0,0,0,0,0,0]
+    stat[this.char.engraveStat]+=+this.engrave;
     this.gear.forEach(g=>{
       stat[g.main]+=this.constants.STAT_ENUM[g.main].main[g.level]
       g.subs.forEach(sub=>{
@@ -95,7 +97,7 @@ export class GearBuilderComponent {
         case 4:
         case 5:
           //@ts-ignore
-          this.char.gear_stats[arr[i-3].name]+=+((this.char.base_stats[arr[i-3].name]*(stat[i]/100)).toFixed(0))
+          this.char.gear_stats[arr[i-3].name]+=+(this.char.base_stats[arr[i-3].name]*(stat[i]/100)).toFixed(0)
           break;
         default:
           //@ts-ignore
