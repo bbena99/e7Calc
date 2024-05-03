@@ -73,11 +73,11 @@ export class GearBuilderComponent {
     if(gear.subs[subIndex].value && gear.subs[subIndex].value!>ret)gear.subs[subIndex].value=ret;
     return ""+ret;
   }
-  isUsed(checker:Gear,val:number):boolean{
+  isUsed(checker:Gear,val:number):boolean|undefined{
     if(checker.main===val)return true;
     const boolArr:boolean[] = checker.subs.map(s=>{return (s.stat===val)?true:false;})
     const ret:boolean = boolArr.indexOf(true)>=0;
-    return (boolArr.indexOf(true)>=0)?true:false
+    return (boolArr.indexOf(true)>=0)?true:undefined;
   }
   nav(){
     this.router.navigateByUrl("/Home")

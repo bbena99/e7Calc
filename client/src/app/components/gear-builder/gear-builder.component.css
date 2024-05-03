@@ -29,10 +29,11 @@ h1{
   border: 2px solid #F6B17A;
   border-radius: 15px;
   padding: 2px;
+  background: linear-gradient(0.175turn,#424769,#2D3250,#424769);
 }
 .equipmentCard{
   width: 100%;
-  background: #424769;
+  background: linear-gradient(0.125turn,#424769,#2D3250,#424769);
   border: 2px solid #F6B17A;
   border-radius: 15px;
   box-shadow:
