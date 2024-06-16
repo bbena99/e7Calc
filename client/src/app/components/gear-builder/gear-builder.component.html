@@ -111,8 +111,8 @@
       <div class="input-group">
         <span class="input-group-text col-1">Main stat:</span>
         <select class="form-select" [(ngModel)]="gear[card].main" aria-label="Select main stat" disabled="{{(card<3?(true):(false))}}" (change)="changer()">
-          <option *ngFor="let opt of this.constants.STAT_ENUM; let i = index" [value]="+i">
-            {{opt.name}}
+          <option *ngFor="let opt of gear[card].posibleMain; let i = index" [value]="+opt">
+            {{this.constants.STAT_ENUM[opt].name}}
           </option>
         </select>
         <span class="input-group-text number-input">{{constants.STAT_ENUM[gear[card].main].main[gear[card].level]}}</span>
@@ -161,8 +161,8 @@
         <div style="display: flex;flex-direction: column;"><!--Right box-->
           <div *ngFor="let row of gear[card].subs; let j = index" class="input-group sub-row">
             <select class="form-select" [(ngModel)]="gear[card].subs[j].stat" aria-label="Select main stat" (change)="getMin(+(row.stat),gear[card],j);getMax(+(row.stat),gear[card],j);changer()">
-              <option *ngFor="let opt of this.constants.STAT_ENUM; let i = index" [value]="+i" disabled="{{isUsed(gear[card],i)}}">
-                {{opt.name}}
+              <option *ngFor="let opt of gear[card].posibleSubs; let i = index" [value]="+opt" disabled="{{isUsed(gear[card],+opt)}}">
+                {{this.constants.STAT_ENUM[opt].name}}
               </option>
             </select>
             <input 

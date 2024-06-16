@@ -40,16 +40,49 @@ export class GearBuilderComponent {
     this.artifact={attack:0,health:0};
     this.engrave=0;
     this.gear=[
-      {...newGear(), main:0, posibleMain:[0]},
-      {...newGear(), main:2,id:1, posibleMain:[2]},
-      {...newGear(), main:1,id:2, posibleMain:[1]},
-      {...newGear(), main:3,id:3, posibleMain:[0,1,2,3,4,5,6,7,8,9,10]},
-      {...newGear(), main:3,id:4, posibleMain:[0,1,2,3,4,5,6,7,8,9,10]},
-      {...newGear(), main:3,id:5, posibleMain:[0,1,2,3,4,5,6,7,8,9,10]},
+      {//Weapon
+        ...newGear(),
+        id:0,
+        main:0,
+        posibleMain:[0],
+        posibleSubs:[2,3,5,6,7,8,9,10]
+      },{//Helmet
+        ...newGear(),
+        id:1,
+        main:2,
+        posibleMain:[2],
+        posibleSubs:[0,1,2,3,4,5,6,7,8,9,10],
+      },{//Armor
+        ...newGear(), 
+        id:2, 
+        main:1,
+        posibleMain:[1],
+        posibleSubs:[2,4,5,6,7,8,9,10],
+      },{//Necklace
+        ...newGear(),
+        id:3,
+        main:3,
+        posibleMain:[0,1,2,3,4,5,7,8]
+      },{//Ring
+        ...newGear(),
+        id:4, 
+        main:3,
+        posibleMain:[0,1,2,3,4,5,9,10]
+      },{//Boots
+        ...newGear(),
+        id:5,
+        main:3,
+        posibleMain:[0,1,2,3,4,5,6]
+      },
     ]
-    this.gear[0].subs[0].stat=4
-    this.gear[1].subs[1].stat=4
-    this.gear[2].subs[2].stat=4
+    this.gear.forEach(g=>{
+      g.subs=this.gear[0].posibleSubs.slice(-4).map(e=>{
+        return {
+          stat:e,
+          value:undefined
+        }
+      })
+    })
 
   }
   getBase(key:string):string{
@@ -75,7 +108,9 @@ export class GearBuilderComponent {
   }
   isUsed(checker:Gear,val:number):boolean|undefined{
     if(checker.main===val)return true;
-    const boolArr:boolean[] = checker.subs.map(s=>{return (s.stat===val)?true:false;})
+    const boolArr:boolean[] = checker.subs.map(s=>{
+      return (+(s.stat)===val)?true:false;
+    })
     const ret:boolean = boolArr.indexOf(true)>=0;
     return (boolArr.indexOf(true)>=0)?true:undefined;
   }
